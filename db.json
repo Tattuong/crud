@@ -1,24 +1,10 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "ddsadsad",
-      "email": "json-server",
-      "address": "typicode",
-      "phone": 123
-    },
-    {
-      "id": 2,
-      "name": "dndn",
-      "email": "json-server",
-      "address": "typicode",
-      "phone": 123
-    },
-    {
       "id": 2,
       "name": "tech",
       "email": "json-server",
-      "phone": 123213 
+      "phone": 123213
     }
   ]
-}   
+}
