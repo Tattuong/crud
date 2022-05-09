@@ -5,7 +5,6 @@ const addModalForm = document.querySelector(".form-user");
 const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
 
-
 // popup
 btn[0].onclick = () => {
   modal[0].style.display = "block";
@@ -29,7 +28,6 @@ window.onclick = function (event) {
     modal[1].style.display = "none";
   }
 };
-
 //checkbox all
 $("#selectAll").click(function (e) {
   if ($(this).hasClass("checkedAll")) {
@@ -42,12 +40,11 @@ $("#selectAll").click(function (e) {
 });
 
 $(document).ready(function(){
-
+  
 })
+
 //showpopup moda
 //showPopup edit, delete
-// "btn-edit_14"
-// TODO: Using jquery to list btn-edit, btn-del click. Each btn should have unique id like: btn-edit__14
 function showDel(user) {
   console.log("showdel");
   const btnDel = document.querySelector(`[btn-id = '${user.id}'] .btn-del`);
@@ -71,53 +68,5 @@ function edit(user) {
 }
 
 
-// deleteModalForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   fetch(`${url}/${id}`, {
-//     method: "DELETE",
-//   })
-//     .then((res) => res.json())
-//     .then(() => fetchUsers());
-// });
+//edit
 
-// addModalForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   fetch(url, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       name: addModalForm.name.value,
-//       email: addModalForm.email.value,
-//       address: addModalForm.address.value,
-//       phone: addModalForm.phone.value,
-//     }),
-//   })
-//     .then((res) => res.json())
-//     .then((data) => {
-//       const dataArr = [];
-//       dataArr.push(data);
-//       fetchUsers(dataArr);
-//     });
-// });
-
-// //edit
-// editModalForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   fetch(`${url}/${id}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-
-//     body: JSON.stringify({
-//       name: editModalForm.name.value,
-//       email: editModalForm.email.value,
-//       address: editModalForm.address.value,
-//       phone: editModalForm.phone.value,
-//     }),
-//   })
-//     .then((res) => res.json())
-//     .then(() => fetchUsers());
-// });

@@ -1,24 +1,22 @@
 // render users
 const url = "http://localhost:3000/users";
 const tableUsers = document.querySelector("#table-user");
+
 let id = "";
-let page = 1;
 let listUsers = [];
 let listSelectedUser = [];
+//checkbox all users
 
-//checkbox all user
 const checkAllUsers = () => {
   console.log(listUsers);
-  const checkboxValue = document.getElementById("selectedAll").checked;
+  const checkboxValue = document.getElementById("selectedAll");
   if (checkboxValue) {
     listSelectedUser = listUsers.map();
   }
 };
-checkAllUsers
-
 const deleteAllUsers = () => {
-  listSelectedUser.map((userId) => {
-    fetch(`${url}/${userId}`, {
+  listSelectedUser.map((user) => {
+    fetch(`${url}/${user}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -37,14 +35,15 @@ const addListSelected = (value) => {
   }
 };
 
-const fetchUsers = () => {
+function fetchUsers (){
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      listUsers = data.slice(page - 1);
+      listUsers = data.slice();
       renderUsers();
     });
-};  
+};
+  
 //render list user
 const renderUsers = () => {
   tableUsers.innerHTML = "";
@@ -73,41 +72,65 @@ const renderUsers = () => {
 
 //delete user
 function handleDeleteUser(id) {
-  const action = alert("Are you sure you want to delele?");
-  const msg = "User deleted successfully!";
-  users.forEach(function (user, i) {
-    if (user.id == id && action != false) {
-      user.splice(i, 1);
-      $("#userTable #user-" + user.id).remove();
-      flashMessage(msg);
-    }
-  })
-}
-
-function handleAddUser() {}
-function handleEditUser() { 
-  users.forEach(function (user, i) {
-    if (user.id == id) {
-      $(".table-user").empty().append(`
-                <fo rm id="updateUser" action="">
-                    <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" value="${user.name}"/>
-                    <label for="address">Address</label>
-                    <input class="form-control" type="text" name="address" value="${user.address}"/>
-                    <label for="age">Age</label>
-                    <input class="form-control" type="number" name="age" value="${user.age}" min=10 max=100/>
-            `);
-
-      $(".modal-footer").empty().append(`
-                    <button type="button" type="submit" class="btn btn-primary" onClick="updateUser(${id})">Save changes</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </fo>
-            `);
-    }
+  deleteModalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetch(`${url}/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => fetchUsers());
   });
 }
-function main() {
-  fetchUsers();
+
+//addUser
+function handleAddUser() {
+    console.log("sd");
+  addModalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: addModalForm.name.value,
+        email: addModalForm.email.value,
+        address: addModalForm.address.value,
+        phone: addModalForm.phone.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const dataArr = [];
+        dataArr.push(data);
+        fetchUsers(dataArr);
+      });
+  });
 }
 
-main();
+function handleEditUser() {
+  editModalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetch(`${url}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        name: editModalForm.name.value,
+        email: editModalForm.email.value,
+        address: editModalForm.address.value,
+        phone: editModalForm.phone.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => fetchUsers());
+  });
+}
+
+
+function start() {
+  fetchUsers();
+}
+start();
