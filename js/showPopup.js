@@ -34,31 +34,8 @@ $("#selectAll").click(function (e) {
     $(this).addClass("checkedAll");
   }
 });
-
 $(document).ready(function () {});
 
 //showpopup moda
 //showPopup edit, delete
-function showDel(user) {
-  console.log("showdel");
-  const btnDel = document.querySelector(`[btn-id = '${user.id}'] .btn-del`);
-  btnDel.addEventListener("click", (e) => {
-    e.preventDefault();
-    id = user.id;
-    $("#deleteModal").modal("show");
-  });
-}
-
-function edit(user) {
-  const btnEdit = document.querySelector(`[data-id = '${user.id}'] .btn-edit`);
-  btnEdit.addEventListener("click", (e) => {
-    e.preventDefault();
-    id = user.id;
-    $("#editModal").modal("show");
-    (editModalForm.name.value = user.name),
-      (editModalForm.email.value = user.email),
-      (editModalForm.address.value = user.address),
-      (editModalForm.phone.value = user.phone);
-  });
-}
 //edit
