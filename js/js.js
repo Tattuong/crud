@@ -156,7 +156,6 @@ function handleEditUser() {
   });
 }
 
-
 function start() {
   fetchUsers();
 }
