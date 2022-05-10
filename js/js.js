@@ -3,24 +3,23 @@ const url = "http://localhost:3000/users";
 const tableUsers = document.querySelector("#table-user");
 const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
-const addModalForm = document.querySelector("#addModal .form-user")
-
+const addModalForm = document.querySelector("#addModal .form-user");
 
 let id = "";
 let listUsers = [];
 let listSelectedUser = [];
 
 //checkbox all users
-function checkAllUsers (){
+function checkAllUsers() {
   console.log(listUsers);
   const checkboxValue = document.getElementById("selectedAll");
   if (checkboxValue) {
     listSelectedUser = listUsers.map();
   }
-};
+}
 
 //addIdUser
-function addListSelected (value){
+function addListSelected(value) {
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
   if (checkboxValue) {
     listSelectedUser = listSelectedUser.concat(value);
@@ -28,10 +27,10 @@ function addListSelected (value){
   } else {
     listSelectedUser = listSelectedUser.filter((user) => user !== value);
   }
-};
+}
 
-// del ClickCheckbox
-function deleteAllUsers(){
+//del ClickCheckbox
+function deleteAllUsers() {
   listSelectedUser.map((id) => {
     fetch(`${url}/${id}`, {
       method: "DELETE",
@@ -39,8 +38,7 @@ function deleteAllUsers(){
       .then((res) => res.json())
       .then(() => fetchUsers());
   });
-  };
-
+}
 
 function fetchUsers() {
   fetch(url)
@@ -50,10 +48,9 @@ function fetchUsers() {
       renderUsers();
     });
 }
-
 //render listUser
 
-function renderUsers () {
+function renderUsers() {
   tableUsers.innerHTML = "";
   listUsers.map((user) => {
     const output = ` 
@@ -95,11 +92,11 @@ function renderUsers () {
         (editModalForm.phone.value = user.phone);
     });
   });
-};
+}
 
 //del uniqueUser
 function handleDeleteUser() {
-  deleteModalForm.addEventListener("submit", (e) => {
+  deleteModalForm.addEventListener("click", (e) => {
     e.preventDefault();
     fetch(`${url}/${id}`, {
       method: "DELETE",
@@ -111,19 +108,19 @@ function handleDeleteUser() {
 
 //addUser
 function handleAddUser() {
-    console.log("sd");
-    addModalForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: addModalForm.name.value,
-          email: addModalForm.email.value,
-          address: addModalForm.address.value,
-          phone: addModalForm.phone.value,
+  console.log("sd");
+  addModalForm.addEventListener("click", (e) => {
+    e.preventDefault();
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: addModalForm.name.value,
+        email: addModalForm.email.value,
+        address: addModalForm.address.value,
+        phone: addModalForm.phone.value,
       }),
     })
       .then((res) => res.json())
@@ -135,6 +132,7 @@ function handleAddUser() {
   });
 }
 
+//edit User
 function handleEditUser() {
   editModalForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -156,10 +154,8 @@ function handleEditUser() {
   });
 }
 
-
 function start() {
   fetchUsers();
 }
 
 start();
-

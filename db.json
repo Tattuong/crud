@@ -1,18 +1,25 @@
 {
   "users": [
     {
-      "id": 3,
-      "name": "techec",
-      "email": "tech@gmail.com",
-      "address": "da anang",
-      "phone": "dsadsad"
-    },
-    {
-      "name": "techh",
-      "email": "tattuong17@gmail.com1",
+      "name": "dont",
+      "email": "tattuong11171@gmail.com",
       "address": "dn",
       "phone": "123",
-      "id": 4
+      "id": 6
+    },
+    {
+      "name": "etch",
+      "email": "tuong@gmail.com",
+      "address": "dn",
+      "phone": "123",
+      "id": 7
+    },
+    {
+      "name": "tech",
+      "email": "tattuong17@gmail.com",
+      "address": "dmdm",
+      "phone": "13",
+      "id": 8
     }
   ]
 }
