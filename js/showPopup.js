@@ -1,9 +1,6 @@
 const modal = document.getElementsByClassName("modal-fade");
 const btn = document.getElementsByClassName("myBtn");
 const close = document.getElementsByClassName("close");
-const addModalForm = document.querySelector(".form-user");
-const editModalForm = document.querySelector("#editModal .form-user");
-const deleteModalForm = document.querySelector("#deleteModal .form-user");
 
 // popup
 btn[0].onclick = () => {
@@ -15,11 +12,10 @@ btn[1].onclick = () => {
 close[0].onclick = () => {
   modal[0].style.display = "none";
 };
-close[1].onclick = (    
-) => {
+close[1].onclick = () => {
   modal[1].style.display = "none";
 };
-// close po   pup
+// close popup
 window.onclick = function (event) {
   if (event.target == modal[0]) {
     modal[0].style.display = "none";
@@ -39,9 +35,7 @@ $("#selectAll").click(function (e) {
   }
 });
 
-$(document).ready(function(){
-  
-})
+$(document).ready(function () {});
 
 //showpopup moda
 //showPopup edit, delete
@@ -54,6 +48,7 @@ function showDel(user) {
     $("#deleteModal").modal("show");
   });
 }
+
 function edit(user) {
   const btnEdit = document.querySelector(`[data-id = '${user.id}'] .btn-edit`);
   btnEdit.addEventListener("click", (e) => {
@@ -66,7 +61,4 @@ function edit(user) {
       (editModalForm.phone.value = user.phone);
   });
 }
-
-
 //edit
-
