@@ -11,6 +11,5 @@ function loadDoc(){
       xhttp.open('GET', 'https://httpbin.org/get', true)
       xhttp.send()
     }
-    
     loadDoc()
 }
