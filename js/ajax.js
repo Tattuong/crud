@@ -1,4 +1,4 @@
-const xhttp = new XMLHttpRequest()
+const request = new XMLHttpRequest()
 function loadDoc(){
     var xhttp = new XMLHttpRequest()
     // function này sẽ chạy mỗi khi readyState thay đổi
@@ -13,6 +13,5 @@ function loadDoc(){
       xhttp.send()
     }
     loadDoc()
-    
-    
 }
+
