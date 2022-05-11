@@ -93,7 +93,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="submit" onclick="handleAddUser()" class="btn btn-success"></input>
+						<button type="button" onclick="handleAddUser()" class="btn btn-success"></button>
 					</div>
 				</form>	
 			</div>
@@ -101,7 +101,7 @@
 	</div>
 	<!--delete-->
 	<div id="deleteModal" class="modal-fade">
-		<div class="modal-dialog">
+		<div class="modal-dialog">	
 			<div class="modal-content">
 				<form class="animate form-user">
 					<div class="modal-header">
@@ -113,12 +113,12 @@
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
-						<button onclick="handleDeleteUser()" class="btn btn-danger" value="Delete"> delete
+						<button type="button" onclick="deleteEmployes()" class="btn btn-danger" value="Delete"> delete
 					</div>
 				</form>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<!-- Edit -->
 	<div id="editModal" class="modal-fade">
 		<div class="modal-dialog">
@@ -154,9 +154,9 @@
 			</div>
 		</div>
 	</div>	
-	<!-- <div id="demo"></div>
-  <script src="/js/js.js"></script> -->
-  <script src="/js/showPopup.js"></script>
+	<div id="demo"></div>
+  <!-- <script src="/js/js.js"></script> -->
   <script src="/js/ajax.js"></script>
+  <script src="/js/showPopup.js"></script>
 </body>
 </html>

@@ -5,7 +5,6 @@ const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
 const addModalForm = document.querySelector("#addModal .form-user")
 
-
 let id = "";
 let listUsers = [];
 let listSelectedUser = [];
@@ -18,7 +17,6 @@ function checkAllUsers (){
     listSelectedUser = listUsers.map();
   }
 };
-
 //addIdUser
 function addListSelected (value){
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
@@ -29,7 +27,6 @@ function addListSelected (value){
     listSelectedUser = listSelectedUser.filter((user) => user !== value);
   }
 };
-
 // del ClickCheckbox
 function deleteAllUsers(){
   listSelectedUser.map((id) => {
@@ -41,7 +38,6 @@ function deleteAllUsers(){
   });
   };
 
-
 function fetchUsers() {
   fetch(url)
     .then((res) => res.json())
@@ -50,7 +46,6 @@ function fetchUsers() {
       renderUsers();
     });
 }
-
 //render listUser
 
 function renderUsers () {
@@ -73,7 +68,7 @@ function renderUsers () {
         <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
       </td>
     </tr>       
-`;
+` ;
     tableUsers.insertAdjacentHTML("beforeend", output);
 
     const btnDel = document.querySelector(`[data-id = '${user.id}'] .btn-del`);
@@ -96,7 +91,6 @@ function renderUsers () {
     });
   });
 };
-
 //del uniqueUser
 function handleDeleteUser() {
   deleteModalForm.addEventListener("submit", (e) => {
@@ -159,6 +153,7 @@ function handleEditUser() {
 function start() {
   fetchUsers();
 }
+
 
 start();
 
