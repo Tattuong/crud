@@ -1,8 +1,8 @@
 //CRUD USING JQUERY AJAX
 //AJAX CALL TO SHOW DATA
+
 const editModalForm = document.querySelector("#editModal .form-user");
 const URL = "http://localhost:3000/users";
-
 function fetchData() {
   $.ajax({
     url: URL,
@@ -57,6 +57,7 @@ function fetchData() {
     },
   });
 }
+
 fetchData();
 function deleteEmployes(id) {
   $.ajax({
@@ -114,7 +115,7 @@ function postTutorial(data) {
 
 function loadButtons() {
   $(".editUser").click(function (e) {
-    getOneTutorial($($(this)[0]).data("tutid"));
+    getOneTutorial($($(this)[0]).data("id"));
     e.preventDefault();
   });
 
