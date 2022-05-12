@@ -64,7 +64,7 @@
 				<form class="animate form-user">
 					<div class="modal-header">
 						<h4 class="modal-title">Add Employee</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="submit" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -93,7 +93,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" onclick="handleAddUser()" class="btn btn-success"></button>
+						<button type="submit" onclick="handleAddUser()" class="btn btn-success"></button>
 					</div>
 				</form>	
 			</div>
@@ -113,7 +113,7 @@
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" onclick="handleDeleteUser()" class="btn btn-danger" value="Delete"> delete
+						<button type="submit" onclick="handleDeleteUser()" class="btn btn-danger" value="Delete"> delete
 					</div>
 				</form>
 			</div>
@@ -148,7 +148,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input onclick="handleEditUser()" type="submit"  class="btn btn-info" value="Update">
+						<button onclick="handleEditUser()" type="submit"  class="btn btn-info" value="Update">
 					</div>
 				</form>
 			</div>

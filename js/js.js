@@ -1,5 +1,5 @@
 // render users
-const url = "http://localhost:3000/users";
+const url = "http://localhost:3001/users";
 const tableUsers = document.querySelector("#table-user");
 const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
@@ -17,7 +17,6 @@ function checkAllUsers() {
     listSelectedUser = listUsers.map();
   }
 }
-
 //addIdUser
 function addListSelected(value) {
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
@@ -109,7 +108,7 @@ function handleDeleteUser() {
 //addUser
 function handleAddUser() {
   console.log("sd");
-  addModalForm.addEventListener("click", (e) => {
+  addModalForm.addEventListener("submit", (e) => {
     e.preventDefault();
     fetch(url, {
       method: "POST",
@@ -154,8 +153,10 @@ function handleEditUser() {
   });
 }
 
+
 function start() {
   fetchUsers();
 }
+
 
 start();
