@@ -17,8 +17,8 @@
 </head>
 <body>
 	<div class="container">
-		<div class="table-responsive">
-			<div class="table-wrapper">
+			<div class="table-responsive">
+				<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
 						<div class="col-sm-6">
@@ -61,7 +61,7 @@
 	<div id="addModal" class="modal-fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="animate form-user">
+				<form onsubmit="return false" class="animate form-user">
 					<div class="modal-header">
 						<h4 class="modal-title">Add Employee</h4>
 						<button type="submit" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -93,7 +93,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" onclick="handleAddUser()" class="btn btn-success"></button>
+						<input type="button" onclick="handleAddUser()" class="btn btn-success"></input>
 					</div>
 				</form>	
 			</div>
@@ -123,7 +123,7 @@
 	<div id="editModal" class="modal-fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="animate form-user">
+				<form onsubmit="return false" class="animate form-user">
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -139,7 +139,7 @@
 						</div>
 						<div class="form-group">
 							<label for="address">Address</label>
-							<textarea class="form-control" name="address" required></textarea>
+							<textarea class=	"form-control" name="address" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="phone">Phone</label>
@@ -151,7 +151,7 @@
 						<button onclick="handleEditUser()" type="submit"  class="btn btn-info" value="Update">
 					</div>
 				</form>
-			</div>
+			</div>	
 		</div>
 	</div>	
 	<div id="demo"></div>
