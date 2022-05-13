@@ -2,7 +2,8 @@
 //AJAX CALL TO SHOW DATA
 
 const editModalForm = document.querySelector("#editModal .form-user");
-const URL = "http://localhost:3000/users";
+const URL = "http://localhost:3001/users";
+
 function fetchData() {
   $.ajax({
     url: URL,
@@ -15,8 +16,7 @@ function fetchData() {
       console.log(data);
       $.each(data, function(key, user) {
         $("#table-user").append(`<tr data-id= '${user.id}'>
-        <td>
-          
+        <td>  
           <span class="custom-checkbox">
               <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
             <label for="checkbox1"></label>
@@ -48,7 +48,7 @@ function fetchData() {
           $("#editModal").modal("show");
           (editModalForm.name.value = user.name),
             (editModalForm.email.value = user.email),
-            (editModalForm.address.value = user.address),
+           (editModalForm.address.value = user.address),
             (editModalForm.phone.value = user.phone);
         });
         console.log(key);
@@ -59,12 +59,12 @@ function fetchData() {
 }
 
 fetchData();
-function deleteEmployes(id) {
+function deleteEmployes(id){
   $.ajax({
     url: URL + id,
     method: "DELETE",
     dataType: "json",
-    success: function (data) {
+    success: function(data) {
       console.log(data);
       fetchData();
     },
@@ -77,23 +77,22 @@ function getOneUser(id) {
     method: "get",
     dataType: "json",
     success: function (data) {
-      $($("#updateForm")[0].updateNum).val(data.tutorialNumber);
-      $($("#updateForm")[0].updateTitle).val(data.title);
-      $($("#updateForm")[0].updateAuthor).val(data.author);
-      $($("#updateForm")[0].updateType).val(data.type);
+      $($("#updateForm")[0].updateName).val(data.name);
+      $($("#updateForm")[0].updateEmail).val(data.email);
+      $($("#updateForm")[0].updateaddress).val(data.address);
+      $($("#updateForm")[0].updatePhone).val(data.phone);
       $("#updateForm").show();
     },
   });
 }
 
-$("#submitTutorial").on("click", function (e) {
+$("#submit").on("click", function (e) {
   let data = {
     tutorialNumber: $($("#newForm")[0].tutNum).val(),
     title: $($("#newForm")[0].title).val(),
     author: $($("#newForm")[0].author).val(),
     type: $($("#newForm")[0].type).val(),
   };
-
   postTutorial(data);
   $("#newForm").trigger("reset");
   $("#newForm").toggle();
@@ -103,14 +102,14 @@ $("#submitTutorial").on("click", function (e) {
 function postTutorial(data) {
   $.ajax({
     url: URL,
-    method: "POST",
-    dataType: "json",
-    data: data,
-    success: function (data) {
-      console.log(data);
-      getTutorials();
-    },
-  });
+      method: "POST",
+      dataType: "json",
+      data: data,
+      success: function (data) {
+        console.log(data);
+        getTutorials();
+      },
+    });
 }
 
 function loadButtons() {
@@ -137,6 +136,8 @@ function putTutorial(id, data) {
     },
   });
 }
+
+
 $("#updateTutorial").on("click", function (e) {
   let data = {
     tutorialNumber: $($("#updateForm")[0].updateNum).val(),
@@ -214,7 +215,7 @@ function deleteTutorial(id) {
 //       rows = rows + "<td>" + value.name + "</td>";
 //       rows = rows + "<td>" + value.description + "</td>";
 //       rows = rows + '<td data-id="' + value.id + '">';
-//       rows =
+//       rows = 
 //         rows +
 //         '<button data-toggle="modal" data-target="#edit-item" class="btn btn-primary edit-item">Edit</button> ';
 //       rows =
