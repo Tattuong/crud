@@ -144,9 +144,11 @@ function renderUsers() {
         (editModalForm.phone.value = user.phone);
     });
   });
-} 
+}
+
 //del uniqueUser
-  function handleDeleteUser() {s
+  function handleDeleteUser() {
+ 
   deleteModalForm.addEventListener("click", (e) => {
     e.preventDefault();
     fetch(`${url}/${id}`, {
@@ -201,11 +203,10 @@ function handleEditUser() {
       }),
     })
       .then((res) => res.json())    
+      .then((res) => res.fetchUsers())
   });
 }
 function start() {
   fetchUsers();
 }
-
-
 start();

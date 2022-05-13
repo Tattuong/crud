@@ -8,8 +8,7 @@ function loadDoc(){
         document.getElementById('table-user').innerHTML = this.responseText
         console.log('XMLHttpRequest GET ', this.responseText )
       }
-    
-      xhttp.open('GET', 'https://httpbin.org/get', true)
+      xhttp.open('GET', 'http://localhost:3000/users', true)
       xhttp.send()
     }
     loadDoc()
