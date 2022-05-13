@@ -13,13 +13,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
 	<title>Manage Employees</title>
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css">	
 </head>
-
 <body>
+
 	<div class="container">
-		<div class="table-responsive">
-			<div class="table-wrapper">
+			<div class="table-responsive">
+				<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
 						<div class="col-sm-6">
@@ -47,10 +47,9 @@
 							<th>Address</th>
 							<th>Phone</th>
 							<th>Actions</th>
-						</tr>
+						</tr>	
 					</thead>
 					<tbody id="table-user">
-					 
 					</tbody>
 				</table>
 				<div id="pagination" class="pagenumbers">
@@ -59,13 +58,14 @@
 		</div>
 	</div>
 	<!--add -->
+l
 	<div id="addModal" class="modal-fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="animate form-user">
+				<form false" class="animate form-user">
 					<div class="modal-header">
 						<h4 class="modal-title">Add Employee</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="submit" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -94,15 +94,15 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" onclick="handleAddUser()" class="btn btn-success"></button>
+						<button type="button" onclick="handleAddUser()" class="btn btn-success"></button>
 					</div>
 				</form>	
 			</div>
 		</div>
-	</div>	
+	</div>
 	<!--delete-->
 	<div id="deleteModal" class="modal-fade">
-		<div class="modal-dialog">	
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<form class="animate form-user">
 					<div class="modal-header">
@@ -114,7 +114,7 @@
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" onclick="deleteEmployes()" class="btn btn-danger" value="Delete"> delete
+						<button type="submit" onclick="handleDeleteUser()" class="btn btn-danger" value="Delete"> delete
 					</div>
 				</form>
 			</div>
@@ -124,7 +124,7 @@
 	<div id="editModal" class="modal-fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="animate form-user">
+				<form false" class="animate form-user">
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -152,12 +152,12 @@
 						<button onclick="handleEditUser()" type="submit"  class="btn btn-info" value="Update">
 					</div>
 				</form>
-			</div>
+			</div>	
 		</div>
-	</div>	
+	</div>		
 	<div id="demo"></div>
   <!-- <script src="/js/js.js"></script> -->
   <script src="/js/ajax.js"></script>
   <script src="/js/showPopup.js"></script>
-</body>
+</body>	
 </html>

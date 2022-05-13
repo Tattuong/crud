@@ -1,39 +1,18 @@
 {
   "users": [
     {
-      "id": 3,
-      "name": "tech",
-      "email": "tech@gmail.com",
-      "address": "da anang",
-      "phone": "dsadsad"
-    },
-    {
-      "name": "techh",
-      "email": "tattuong17@gmail.com1",
+      "name": "213dsdsd",
+      "email": "123@gmail.com",
       "address": "dn",
       "phone": "123",
-      "id": 4
+      "id": 15
     },
     {
-      "name": "tuongng",
-      "email": "tattuong17@gmail.com",
+      "name": "213dsdsd",
+      "email": "123@gmail.com",
       "address": "dn",
       "phone": "123",
-      "id": 5
-    },
-    {
-      "name": "tuongnggg",
-      "email": "tattuong17@gmail.com",
-      "address": "dn",
-      "phone": "123",
-      "id": 6
-    },
-    {
-      "name": "tuonggg",
-      "email": "tattuong17@gmail.com",
-      "address": "dn",
-      "phone": "123",
-      "id": 7
+      "id": 12
     }
   ]
 }
