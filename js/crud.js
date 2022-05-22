@@ -1,30 +1,129 @@
-// Render employs
+const openModal = () => {
+  document.getElementById("modal").classList.add("active");
+};
+const closeModal = () => {
+  clearFields();
+  document.getElementById("modal").classList.remove("active");
+};
+const getLocalStorage = () =>
+  JSON.parse(localStorage.getItem("db_client")) ?? [];
+const setLocalStorage = (dbClient) =>
+  localStorage.setItem("db_client", JSON.stringify(dbClient));
 
-function renderEmployes (){     
-    
-}
-//resetInput
+// CRUD - create read update delete
+const deleteClient = (index) => {
+  const dbClient = readClient();
+  dbClient.splice(index, 1)
+  setLocalStorage(dbClient);
+};
+const updateClient = (index, client) => {
+  const dbClient = readClient();
+  dbClient[index] = client;
+  setLocalStorage(dbClient);
+};
+const readClient = () => getLocalStorage();
 
-function resetEmployes  () {
+const createClient = (client) => {
+  const dbClient = getLocalStorage();
+  dbClient.push(client);
+  setLocalStorage(dbClient);
+};
+//checkout user
+const isValidFields = () => {
+  return document.getElementById("form").reportValidity();
+};
+const clearFields = () => {
+  const fields = document.querySelectorAll(".modal-field");
+  fields.forEach((field) => (field.value = ""));
+  document.getElementById("nome").dataset.index = "new";
+};
+const saveClient = () => {
+  if (isValidFields()) {
+    const client = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      address: document.getElementById("celular").value,
+      phone: document.getElementById("cidade").value,
+    };
+    const index = document.getElementById("nome").dataset.index;
+    if (index == "new") {
+      createClient(client);
+      updateTable();
+      closeModal();
+    } else {
+      updateClient(index, client);
+      updateTable();
+      closeModal();
+    }
+  }
+};
+const createRow = (client, index) => {
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+        <td>${client.name}</td>
+        <td>${client.email}</td>
+        <td>${client.address}</td>
+        <td>${client.phone}</td>
+        <td>
+            <button type="button" class="button green" id="edit-${index}">Edit</button>
+            <button type="button" class="button red" id="delete-${index}" >Delete</button>
+        </td>
+    `;
+  document.querySelector("#tableClient>tbody").appendChild(newRow);
+};
+const clearTable = () => {
+  const rows = document.querySelectorAll("#tableClient>tbody tr");
+  rows.forEach((row) => row.parentNode.removeChild(row));
+};
 
-}
+const updateTable = () => {
+  const dbClient = readClient();
+  clearTable();
+  dbClient.forEach(createRow);
+};
 
-// handelDeleleEmployes
+const fillFields = (client) => {
+  document.getElementById("name").value = client.name;
+  document.getElementById("email").value = client.email;
+  document.getElementById("address").value = client.address;
+  document.getElementById("phone").value = client.phone;
+  document.getElementById("name").dataset.index = client.index;
+};
 
-function handelDeleleEmployes() {
+const editClient = (index) => {
+  const client = readClient()[index];
+  client.index = index;
+  fillFields(client);
+  openModal();
+};
+const editDelete = (event) => {
+  if (event.target.type == "button") {
+    const [action, index] = event.target.id.split("-");
 
-}
+    if (action == "edit") {
+      editClient(index);
+    } else {
+      const client = readClient()[index];
+      const response = confirm(`delete${client.name}`);
+      if (response) {
+        deleteClient(index);
+        updateTable();
+      }
+    }
+  }
+};
+updateTable();
+// Event
 
-//handelAddEmployes
 
-function handelAddEmployes (){    
-}
+document.getElementById("popupModal").addEventListener("click", openModal);
 
-//handelAddEmployes
-function handelAddEmployes (){
+document.getElementById("modalClose").addEventListener("click", closeModal);
 
-}
-function main () {
-    
-}
+document.getElementById("save").addEventListener("click", saveClient);
 
+document
+  .querySelector("#tableClient>tbody")
+  .addEventListener("click", editDelete);
+
+document.getElementById("cancel").addEventListener("click", closeModal);

@@ -41,6 +41,8 @@ body {
 	border: none;
 	outline: none !important;
 	margin-left: 10px;
+	transition: box-shadow .6s ease;
+
 }
 .table-title .btn i {
 	float: left;
@@ -301,6 +303,4 @@ table.table .avatar {
 #address{
 	resize: none;
 }
-
-
 

@@ -5,36 +5,35 @@ const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
 const addModalForm = document.querySelector("#addModal .form-user");
 
-let id = "";
-let listUsers = [];
-let listSelectedUser = [];
-
+let id = ""
+let listSelectedUser = [] 
+let listUsers = [{
+  
+}]
 //checkbox all users
 function checkAllUsers() {
-  console.log(listUsers);
+  console.log(listSelectedUser);
   const checkboxValue = document.getElementById("selectedAll");
   if (checkboxValue) {
-     listSelectedUser = listUsers.map();
+    listSelectedUser = listUsers.map();
   }
 }
 
-//addIdUser
+// check iduser
 function addListSelected(value) {
+  console.log(value);
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
-
+  if(checkboxValue){      
+    listSelectedUser = listSelectedUser.concat()
   }
-  
+  } 
+
 function handelAddCustomer() {
-  
-
 }
-
-function handleDeleteCustomer() {
-
-}
-
-
-
+//delete user
+function handleDeleteCustomer() {}
+//eidt user
+function handelEditCustomer() {}
 
 function fetchUsers() {
   fetch(url)
@@ -63,10 +62,8 @@ function renderUsers() {
         <a href="#editModal" class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
         <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
       </td>
-    </tr>       
+    </tr>
 `;
-
-
     tableUsers.insertAdjacentHTML("beforeend", output);
 
     const btnDel = document.querySelector(`[data-id = '${user.id}'] .btn-del`);
@@ -89,22 +86,18 @@ function renderUsers() {
     });
   });
 }
-
-
-
 // ClickCheckbox
-function deleteUsers() {
+function deleteAllUser() {
   listSelectedUser.map((id) => {
     fetch(`${url}/${id}`, {
       method: "DELETE",
-    })
-      .then((res) => res.json())
-
+    }).then((res) => res.json());
   });
 }
-
-
-
+function start() {
+  fetchUsers();
+}
+start();
 // function fetchUsers() {
 //   $.ajax({
 //     url: url,
@@ -134,7 +127,9 @@ function deleteUsers() {
 //       </tr>`);
 //         const btnDel = document.querySelector(
 //           `[data-id = '${user.id}'] .btn-del`
-//         );
+//         ); 
+
+
 //         btnDel.addEventListener("click", (e) => {
 //           e.preventDefault();
 //           id = user.id;
@@ -152,8 +147,8 @@ function deleteUsers() {
 //             (editModalForm.email.value = user.email),
 //             (editModalForm.address.value = user.address),
 //             (editModalForm.phone.value = user.phone);
-//         });
-//         console.log(key);
+  //         });
+  //         console.log(key);
 //       });
 
 //     },
@@ -165,7 +160,7 @@ function deleteUsers() {
 //del uniqueUser
 // function handleDeleteUser() {
 //   deleteModalForm.addEventListener("click", () => {
-   
+
 //     fetch(`${url}/${id}`, {
 //       method: "DELETE",
 //     })
@@ -184,7 +179,7 @@ function deleteUsers() {
 //         "Content-Type": "application/json",
 //       },
 //       body: JSON.stringify({
-//         name: addModalForm.name.value,
+//         name: addModalForm.name.va lue,
 //         email: addModalForm.email.value,
 //         address: addModalForm.address.value,
 //         phone: addModalForm.phone.value,
@@ -220,9 +215,3 @@ function deleteUsers() {
 //       .then((res) => res.fetchUsers());
 //   });
 //
-
-function start() {
-  fetchUsers();
-}
-
-start();

@@ -1,7 +1,6 @@
 const modal = document.getElementsByClassName("modal-fade");
 const btn = document.getElementsByClassName("myBtn");
 const close = document.getElementsByClassName("close");
-  
   // popup
   btn[0].onclick = () => {
     modal[0].style.display = "block";
@@ -21,8 +20,8 @@ const close = document.getElementsByClassName("close");
       modal[0].style.display = "none";
     }
     if (event.target == modal[1]) {
-      modal[1].style.display = "none";
-    }
+        modal[1].style.display = "none";
+      }
   };
   //checkbox all
   $("#selectAll").click(function (e) {
@@ -35,6 +34,6 @@ const close = document.getElementsByClassName("close");
     }
   });
   
-  //showpopup moda
+  //showpopup modal
   //showPopup edit, delete
   //edit
