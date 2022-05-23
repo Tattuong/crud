@@ -5,11 +5,9 @@ const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
 const addModalForm = document.querySelector("#addModal .form-user");
 
-let id = ""
-let listSelectedUser = [] 
-let listUsers = [{
-  
-}]
+let id = "";
+let listSelectedUser = [];
+let listUsers = [{}];
 //checkbox all users
 function checkAllUsers() {
   console.log(listSelectedUser);
@@ -18,86 +16,94 @@ function checkAllUsers() {
     listSelectedUser = listUsers.map();
   }
 }
-
 // check iduser
 function addListSelected(value) {
   console.log(value);
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
-  if(checkboxValue){      
-    listSelectedUser = listSelectedUser.concat()
+  if (checkboxValue) {
+    listSelectedUser = listSelectedUser.concat();
   }
-  } 
+}
 
 function handelAddCustomer() {
+  
 }
 //delete user
-function handleDeleteCustomer() {}
+function handleDeleteCustomer(index) {
+  alert('deleted')
+}
 //eidt user
 function handelEditCustomer() {}
 
-function fetchUsers() {
+function renderUsers() {
+  tableUsers.innerHTML = "";
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      listUsers = data.slice();
-      renderUsers();
-    });
-}
-function renderUsers() {
-  tableUsers.innerHTML = "";
-  listUsers.map((user) => {
-    const output = ` 
-  <tr data-id= '${user.id}'>
-      <td>
-        <span class="custom-checkbox">
-            <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
-          <label for="checkbox1"></label>
-        </span> 
-      </td>
-      <td>${user.name}</td>
-      <td>${user.email}</td>  
-      <td>${user.address}</td>
-      <td>${user.phone}</td>
-      <td>
-        <a href="#editModal" class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
-        <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
-      </td>
-    </tr>
-`;
-    tableUsers.insertAdjacentHTML("beforeend", output);
+      data.map((user) => {
+        const output = ` 
+    <tr data-id= '${user.id}'>
+        <td>
+          <span class="custom-checkbox">
+              <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
+            <label for="checkbox1"></label>
+          </span> 
+        </td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>  
+        <td>${user.address}</td>
+        <td>${user.phone}</td>
+        <td>
+          <a href="#editModal" class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
+          <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
+        </td>
+      </tr>
+  `;
+        tableUsers.insertAdjacentHTML("beforeend", output);
 
-    const btnDel = document.querySelector(`[data-id = '${user.id}'] .btn-del`);
-    btnDel.addEventListener("click", (e) => {
-      e.preventDefault();
-      id = user.id;
-      $("#deleteModal").modal("show");
+        const btnDel = document.querySelector(
+          `[data-id = '${user.id}'] .btn-del`
+        );
+
+        btnDel.addEventListener("click", (e) => {
+          e.preventDefault();
+          id = user.id;
+          $("#deleteModal").modal("show");
+        });
+
+        const btnEdit = document.querySelector(
+          `[data-id = '${user.id}'] .btn-edit`
+        );
+
+        btnEdit.addEventListener("click", (e) => {
+          e.preventDefault();
+          id = user.id;
+          $("#editModal").modal ("show");
+          (editModalForm.name.value = user.name),
+            (editModalForm.email.value = user.email),
+            (editModalForm.address.value = user.address),
+            (editModalForm.phone.value = user.phone);
+        });
+      });
     });
-    const btnEdit = document.querySelector(
-      `[data-id = '${user.id}'] .btn-edit`
-    );
-    btnEdit.addEventListener("click", (e) => {
-      e.preventDefault();
-      id = user.id;
-      $("#editModal").modal("show");
-      (editModalForm.name.value = user.name),
-        (editModalForm.email.value = user.email),
-        (editModalForm.address.value = user.address),
-        (editModalForm.phone.value = user.phone);
-    });
-  });
 }
-// ClickCheckbox
-function deleteAllUser() {
-  listSelectedUser.map((id) => {
-    fetch(`${url}/${id}`, {
-      method: "DELETE",
-    }).then((res) => res.json());
-  });
-}
+
 function start() {
-  fetchUsers();
+  renderUsers();
 }
 start();
+
+
+// ClickCheckbox
+// function deleteAllUser() {
+//   listSelectedUser.map((id) => {
+//     fetch(`${url}/${id}`, {
+//       method: "DELETE",
+//     }).then((res) => res.json());
+//   });
+// }
+
+
 // function fetchUsers() {
 //   $.ajax({
 //     url: url,
@@ -127,8 +133,7 @@ start();
 //       </tr>`);
 //         const btnDel = document.querySelector(
 //           `[data-id = '${user.id}'] .btn-del`
-//         ); 
-
+//         );
 
 //         btnDel.addEventListener("click", (e) => {
 //           e.preventDefault();
@@ -147,20 +152,19 @@ start();
 //             (editModalForm.email.value = user.email),
 //             (editModalForm.address.value = user.address),
 //             (editModalForm.phone.value = user.phone);
-  //         });
-  //         console.log(key);
+//         });
+//         console.log(key);
 //       });
 
 //     },
 //   });
-// }
+// 
 
 //render listUser
 
-//del uniqueUser
+//del uniqueUs
 // function handleDeleteUser() {
 //   deleteModalForm.addEventListener("click", () => {
-
 //     fetch(`${url}/${id}`, {
 //       method: "DELETE",
 //     })
@@ -179,7 +183,7 @@ start();
 //         "Content-Type": "application/json",
 //       },
 //       body: JSON.stringify({
-//         name: addModalForm.name.va lue,
+//         name: addModalForm.name.value,
 //         email: addModalForm.email.value,
 //         address: addModalForm.address.value,
 //         phone: addModalForm.phone.value,
@@ -196,9 +200,10 @@ start();
 
 //edit User
 // function handleEditUser() {
-//   editModalForm.addEventListener("click", () => {
+//   editModalForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
 
-//       fetch(`${url}/${id}`, {
+//     fetch(`${url}/${id}`, {
 //       method: "PATCH",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -212,6 +217,7 @@ start();
 //       }),
 //     })
 //       .then((res) => res.json())
-//       .then((res) => res.fetchUsers());
+//       .then((res) => res.renderUsers());
 //   });
-//
+// }
+

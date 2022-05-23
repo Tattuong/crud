@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
+    <meta 
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
@@ -40,7 +40,7 @@
                 <h2>Manage <b>Employees</b></h2>
               </div>
               <div class="col-sm-6">
-                <button class="btn btn-success myBtn">
+                <button onclick="openModal()" class="btn btn-success myBtn">
                   <i class="bi bi-plus-circle-fill" style="font-size: 16px"></i>
                   Add New Employee
                 </button>
@@ -72,14 +72,16 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="table-user"></tbody>
+            <tbody id="table-user">
+
+            </tbody>
           </table>
           <div id="pagination" class="pagenumbers"></div>
         </div>
       </div>
     </div>
     <!--add -->
-    <div id="addModal" class="modal-fade">
+    <div id="addModal" class="modal">
       <div class="modal-dialog">
         <div class="modal-content">
           <form class="animate form-user">
@@ -141,46 +143,11 @@
             </div>
             <div class="modal-footer">
               <button
-                type="submit"
+                id="btnSave"
                 onclick="handleAddUser()"
                 class="btn btn-success"
               >
                 Add
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!--delete-->
-    <div id="deleteModal" class="modal-fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form class="animate form-user">
-            <div class="modal-header">
-              <h4 class="modal-title">Delete Employee</h4>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              > 
-                &times;
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete these Records?</p>
-              <p class="text-warning">
-                <small>This action cannot be undone.</small>
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                onclick="deleteUsers()"
-                class="btn btn-danger"
-              >
-                Del
               </button>
             </div>
           </form>
@@ -232,13 +199,13 @@
             </div>
             <div class="modal-footer">
               <input
-                type="button"
+     type = ()           type="button"
                 class="btn btn-default"
                 data-dismiss="modal"
                 value="Cancel"
               />
               <button
-                type="click"
+            
                 onclick="handleEditUser()"
                 class="btn btn-info"
                 value="Update"
@@ -250,9 +217,44 @@
         </div>
       </div>
     </div>
+      <!--delete-->
+      <div id="deleteModal" class="modal-fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form class="animate form-user">
+              <div class="modal-header">
+                <h4 class="modal-title">Delete Employee</h4>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-hidden="true"
+                > 
+                  &times;
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete these Records?</p>
+                <p class="text-warning">
+                  <small>This action cannot be undone.</small>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  onclick="handleDeleteCustomer()"
+                  class="btn btn-danger"
+                >
+                  Del
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     <!-- <script src="/js/crud.js"></script> -->
-    <script src="/js/js.js"></script> 
+    
+    <!-- <script src="/js/js.js"></script>  -->
     <!-- <script src="/js/ajax.js"></script> -->
-    <script src="/js/showPopup.js"></script>
+    <!-- <script src="/js/showPopup.js"></script> -->
   </body>
 </html>
