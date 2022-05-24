@@ -195,7 +195,8 @@ table.table .avatar {
 }
 /* Modal styles */
 .modal .modal-dialog {
-	max-width: 400;
+	
+	width: 500px !important;
 }
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
 	padding: 20px 30px;
@@ -203,6 +204,9 @@ table.table .avatar {
 .modal .modal-content {
 	border-radius: 3px;
 	font-size: 14px;
+}
+.modal-content {
+	width: 420px;
 }
 .modal .modal-footer {
 	background: #ecf0f1;
@@ -304,3 +308,14 @@ table.table .avatar {
 	resize: none;
 }
 
+.active {
+	display: flex;
+  }
+  
+  .active .modal {
+	animation: modal .4s;
+  }
+  
+.form-control{
+	display: inline	;
+}

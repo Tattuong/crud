@@ -1,110 +1,136 @@
-const modal = document.querySelector(".modal");
+const modal = document.querySelector(".modal-fade");
 const tableUser = document.querySelector("#table-user");
-const InputName = document.querySelector("#name");
-const InputEmail = document.querySelector("#email");
-const InputAddress = document.querySelector("#address");
-const InputPhone = document.querySelector("#phone");
+const inputName = document.querySelector("#name");
+const inputEmail = document.querySelector("#email");
+const inputAddress = document.querySelector("#address");
+const inputPhone = document.querySelector("#phone");
 const btnSave = document.querySelector("#btnSave");
 
 let listUser;
 let id;
+let listSelectedUser = [];
 
-function openModal(edit = false, index = 0) {
-    console.log("sds");
-  modal.classList.add("active");
+// checkbox all
 
-  modal.onclick = (e) => {
-    if (e.target.className.indexOf("modal") !== -1) {
-      modal.classList.remove("active");
-    }
-  };
-
-  if (edit) {
-    InputName.value = listUser[index].name;
-    InputEmail.value = listUser[index].email;
-    InputAddress.value = listUser[index].address;
-    InputPhone.value = listUser[index].phone;
-    id = index;
-  } else {
-    InputName.value = "";
-    InputEmail.value = "";
-    InputAddress.value = "";
-    InputPhone.value = "";
+function checkAllUsers() {
+  console.log(listSelectedUser);
+  const checkboxValue = document.getElementById("selectedAll");
+  if (checkboxValue) {
+    listSelectedUser = listUser.map();
   }
 }
+// check iduser
+function addListSelected(value) {
+  console.log(value);
+  const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
+  if (checkboxValue) {
+    listSelectedUser = listSelectedUser.concat();
+  }
+}
+//popup
+    function openModal(edit = false, index = 0) {
+    modal.classList.add("active");
+    modal.onclick = (e) => {
+        if (e.target.className.indexOf("modal-fade") !== -1) {
+        modal.classList.remove("active");
+        }
+    };
+    if (edit) {
+        inputName.value = listUser[index].name;
+        inputEmail.value = listUser[index].email;
+        inputAddress.value = listUser[index].address;
+        inputPhone.value = listUser[index].phone;
+        id = index;
+    } else {
+        inputName.value = "";
+        inputEmail.value = "";
+        inputAddress.value = "";
+        inputPhone.value = "";
+    }
+    }
 
-function editItem(index) {
+    //renderUser
+    function renderUser(item, index) {
+    let tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>
+        <span class="custom-checkbox">
+            <input onchange="addListSelected(${index.id})" type="checkbox" id="checkbox1${index.id}" name="options[]" value="1">
+        <label for="checkbox1"></label>
+        </span> 
+    </td>
+    <td>${item.name}</td>
+    <td>${item.email}</td>      
+    <td>${item.address}</td>
+    <td>${item.phone}</td>
+    <td>
+        <a href="#editModal" onclick="editUser(${index})" class="bx bx-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
+        <a href="#deleteModal" onclick="deleteuUser(${index})" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
+    </td>
+        `;
+    tableUser.appendChild(tr);
+    console.log(index);
+    }
+    //edit
+    function editUser(index) {
   openModal(true, index);
 }
 
-function deleteItem(index) {
-  itens.splice(index, 1);
-  setItensBD();
-  loadItens();
+// HandelDeleteUser
+function deleteuUser(index) {
+  listUser.splice(index, 1);
+  setUserDB();
+  loadlistUser();
 }
 
-function insertItem(item, index) {
-  let tr = document.createElement("tr");
+//created user
+function addUser() {
+  console.log("add");
+  btnSave.onclick = (e) => {
+    if (
+      inputName.value == "" ||
+      inputEmail.value == "" ||
+      inputAddress.value == "" ||
+      inputPhone.value == ""
+    ) {
+      return;
+    }
+    e.preventDefault();
 
-  tr.innerHTML = `
-  <td>
-  <span class="custom-checkbox">
-      <input onchange="addListSelected(${index.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
-    <label for="checkbox1"></label>
-  </span> 
-</td>
-<td>${item.name}</td>
-<td>${item.email}</td>  
-<td>${item.address}</td>
-<td>${item.phone}</td>
-<td>
-  <a href="#editModal" onclick="editItem(${index}) class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
-  <a href="#deleteModal" onclick="deleteItem(${index}) class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
-</td>
-  `;
-  tableUser.appendChild(tr);
+    if (id !== undefined) {
+      listUser[id].name = inputName.value;
+      listUser[id].email = inputEmail.value;
+      listUser[id].address = inputAddress.value;
+      listUser[id].phone = inputPhone.value;
+    } else {
+      listUser.push({
+        name: inputName.value,
+        email: inputEmail.value,
+        address: inputAddress.value,
+        phone: inputPhone.value,
+      });
+    }
+
+    setUserDB();
+
+    modal.classList.remove("active");
+    loadlistUser();
+    id = undefined;
+  };
 }
 
-
-function adduser() {
-  console.log("sds");
-  btnSalvar.onclick = (e) => {
-  if (sNome.value == "" || sFuncao.value == "" || sSalario.value == "") {
-    return;
-  }
-
-  e.preventDefault();
-
-  if (id !== undefined) {
-    itens[id].nome = sNome.value;
-    itens[id].funcao = sFuncao.value;
-    itens[id].salario = sSalario.value;
-  } else {
-    itens.push({
-      nome: sNome.value,
-      funcao: sFuncao.value,
-      salario: sSalario.value,
-    });
-  }
-
-  setItensBD();
-
-  modal.classList.remove("active");
-  loadItens();
-  id = undefined;
-};
-}
-
-
-function loadItens() {
-  itens = getItensBD();
+//uploadUser
+function loadlistUser() {
+  listUser = getUserDB();
   tableUser.innerHTML = "";
-  itens.forEach((item, index) => {
-    insertItem(item, index);
+  listUser.forEach((item, index) => {
+    renderUser(item, index);
   });
 }
+//SAVE LOCALSTORAGE
+const getUserDB = () => JSON.parse(localStorage.getItem("dbfunc")) ?? [];
+const setUserDB = () =>
+  localStorage.setItem("dbfunc", JSON.stringify(listUser));
 
-const getItensBD = () => JSON.parse(localStorage.getItem("dbfunc")) ?? [];
-const setItensBD = () => localStorage.setItem("dbfunc", JSON.stringify(itens));
-
-loadItens();
+loadlistUser();
+        

@@ -7,7 +7,7 @@ const addModalForm = document.querySelector("#addModal .form-user");
 
 let id = "";
 let listSelectedUser = [];
-let listUsers = [{}];
+let listUsers = [];
 //checkbox all users
 function checkAllUsers() {
   console.log(listSelectedUser);
