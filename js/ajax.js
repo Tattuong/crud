@@ -1,9 +1,8 @@
 //CRUD USING JQUERY AJAX
-//AJAX CALL TO SHOW DATA
+//AJAX CALL TO SHOW DATA  
 
 const editModalForm = document.querySelector("#editModal .form-user");
 const URL = "http://localhost:3000/users";
-
 function fetchData() {
   $.ajax({
     url: URL,
@@ -11,12 +10,12 @@ function fetchData() {
     dataType: "json",
     data: {
       data: "testdata",
-    },
+    }, 
     success: function (data) {
       console.log(data);
       $.each(data, function (key, user) {
         $("#table-user").append(`<tr data-id= '${user.id}'>
-        <td>  
+        <td>
           <span class="custom-checkbox">
               <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
             <label for="checkbox1"></label>
@@ -30,6 +29,7 @@ function fetchData() {
           <a href="#editModal" class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
           <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
         </td>
+        
       </tr>`);
         const btnDel = document.querySelector(
           `[data-id = '${user.id}'] .btn-del`
@@ -56,8 +56,8 @@ function fetchData() {
     },
   });
 }
-fetchData();
 
+fetchData();  
 function deleteEmployes(id) {
   $.ajax({
     url: URL + id,
@@ -161,7 +161,6 @@ function deleteTutorial(id) {
   });
 }
 
-
 // const url = "http://localhost:3000/users"
 // $(document).ready(function () {
 //   var page = 1;
@@ -251,7 +250,7 @@ function deleteTutorial(id) {
 //       });
 //     } else {
 //       alert("You are missing title or description.");
-//     }
+//     }  
 //   });
 //   /* Remove Item */
 //   $("body").on("click", ".remove-item", function () {
@@ -312,3 +311,4 @@ function deleteTutorial(id) {
 //     }
 //   });
 // });
+

@@ -1,18 +1,32 @@
 {
   "users": [
     {
-      "name": "213dsdsd",
-      "email": "123@gmail.com",
+      "name": "tech",
+      "email": "tattuong17@gmail.com",
       "address": "dn",
-      "phone": "123",
-      "id": 15
+      "phone": "123123",
+      "id": 4
     },
     {
       "name": "213dsdsd",
-      "email": "123@gmail.com",
-      "address": "dn",
+      "email": "tattuong17@gmail.com",
+      "address": "dndndn",
+      "phone": "13123",
+      "id": 5
+    },
+    {
+      "name": "tech",
+      "email": "tattuong17@gmail.com",
+      "address": "dnd",
+      "phone": "13",
+      "id": 6
+    },
+    {
+      "name": "tuongng",
+      "email": "tattuong11171@gmail.com",
+      "address": "dnd",
       "phone": "123",
-      "id": 12
+      "id": 7
     }
   ]
 }

@@ -4,37 +4,81 @@ const tableUsers = document.querySelector("#table-user");
 const editModalForm = document.querySelector("#editModal .form-user");
 const deleteModalForm = document.querySelector("#deleteModal .form-user");
 const addModalForm = document.querySelector("#addModal .form-user");
+const deleteBtn = document.getElementById("delete-btn");
+const addBtn = document.getElementById("add-btn");
+const editBtn = document.getElementById("edit-btn");
 
 let id = "";
-let listSelectedUser = [];
+let listSelectedUser = [];  
 let listUsers = [];
-//checkbox all users
-function checkAllUsers() {
-  console.log(listSelectedUser);
-  const checkboxValue = document.getElementById("selectedAll");
-  if (checkboxValue) {
-    listSelectedUser = listUsers.map();
-  }
-}
-// check iduser
-function addListSelected(value) {
-  console.log(value);
-  const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
-  if (checkboxValue) {
-    listSelectedUser = listSelectedUser.concat();
-  }
-}
 
-function handelAddCustomer() {
-  const addUser = document.getElementById("addUser");
-}
-//delete user
-function handleDeleteCustomer() {
-  alert("deleted");
+const addListSelected = (value) => {
+  const checkboxValue = document.getElementById(`che  ckbox1${value}`).checked;
+  if (checkboxValue) {
+    listSelectedUser = listSelectedUser.concat(value);
+    console.log("btn_id", value);
+  } else {
+    listSelectedUser = listSelectedUser.filter((user) => user !== value);
+  }
+};
+
+// checkbox allArray
+document.getElementById("selectAll").onchange = () => {
+  checkAllUsers();
+};
+
+const checkAllUsers = () => {
+  console.log(listSelectedUser);
+  const checkboxValue = document.getElementById("selectAll").checked;
+  if (checkboxValue) {
+    listSelectedUser = listUsers.map((user) => user.id);
+  } else {
+    listSelectedUser = [];
+  }
+};
+//add user
+function handelAddUser() {  
+
+  addModalForm.addEventListener("click", (e) => {
+    e.preventDefault();
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: addModalForm.name.value,
+        email: addModalForm.email.value,
+        address: addModalForm.address.value,
+        phone: addModalForm.phone.value,
+      }),
+    })
+    
+      .then((res) => res.json())
+      .then((data) => {
+        const dataArr = [];
+        dataArr.push(data);
+        renderUsers();
+      });
+  });
 }
 //eidt user
-function handelEditCustomer() {}
 
+function handelEditUser() {
+  
+}
+
+//delete user
+function handleDeleteUser() {
+  deleteModalForm.addEventListener("click", () => {
+    fetch(`${url}/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => fetchUsers());
+  });
+}
+//renderUser
 function renderUsers() {
   tableUsers.innerHTML = "";
   fetch(url)
@@ -45,9 +89,9 @@ function renderUsers() {
      <tr data-id= '${user.id}'>
         <td>
           <span class="custom-checkbox">
-              <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
+          <input type="checkbox" id="checkbox1${user.id}" value="1">
             <label for="checkbox1"></label>
-          </span> 
+          </span>
         </td>
         <td>${user.name}</td>
         <td>${user.email}</td>  
@@ -78,12 +122,12 @@ function renderUsers() {
         btnEdit.addEventListener("click", (e) => {
           e.preventDefault();
           id = user.id;
-          $("#editModal").modal("show");
-          (editModalForm.name.value = user.name),
+            $("#editModal").modal("show");
+            (editModalForm.name.value = user.name),
             (editModalForm.email.value = user.email),
             (editModalForm.address.value = user.address),
             (editModalForm.phone.value = user.phone);
-        });
+        }); 
       });
     });
 }
@@ -93,6 +137,10 @@ function start() {
 }
 
 start();
+
+addBtn.addEventListener("click", handelAddUser);
+editBtn.addEventListener("click", handelEditUser);
+deleteBtn.addEventListener("click", handleDeleteUser);
 
 // ClickCheckbox
 // function deleteAllUser() {
@@ -109,7 +157,7 @@ start();
 //     method: "GET",
 //     dataType: "json",
 //     data: {
-//       data: "testdata",
+//       data: "testdata",handleDeleteUser
 //     },
 //     success: function (data) {
 //       console.log(data);
@@ -158,7 +206,6 @@ start();
 //     },
 //   });
 //
-
 //render listUser
 
 //del uniqueUs
@@ -172,10 +219,10 @@ start();
 //   });
 // }
 //addUser
+
 // function handleAddUser() {
 //   console.log("sd");
 //   addModalForm.addEventListener("click", () => {
-
 //     fetch(url, {
 //       method: "POST",
 //       headers: {
@@ -196,7 +243,6 @@ start();
 //       });
 //   });
 // }
-
 //edit User
 // function handleEditUser() {
 //   editModalForm.addEventListener("submit", (e) => {

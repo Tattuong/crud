@@ -14,7 +14,7 @@ close[0].onclick = () => {
 };
 close[1].onclick = () => {
   modal[1].style.display = "none";
-};
+};  
 // close popup
 window.onclick = function (event) {
   if (event.target == modal[0]) {
@@ -35,7 +35,7 @@ $("#selectAll").click(function (e) {
   }
 });
 $(document).ready(function () {});
-
 //showpopup moda
 //showPopup edit, delete
 //edit
+
