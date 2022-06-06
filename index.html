@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link
+    <link 
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
@@ -22,14 +22,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap"
-      rel="stylesheet"  
+      rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
-    <title>Manage Employees /title>
+    <title>Manage Employees</title>
     <link rel="stylesheet" href="css/style.css" />
-  </head>
+  </head>   
   <body>
     <div class="container">
       <div class="table-responsive">
@@ -40,7 +40,7 @@
                 <h2>Manage <b>Employees</b></h2>
               </div>
               <div class="col-sm-6">
-                <button class="btn btn-success myBtn">
+                <button class="btn btn-success myBtn btn-del">
                   <i class="bi bi-plus-circle-fill" style="font-size: 16px"></i>
                   Add New Employee
                 </button>
@@ -60,32 +60,32 @@
                     <label for="selectAll"></label>
                   </span>
                 </th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Phone</th>
-                  <th>Actions</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="table-user"></tbody>
           </table>
           <div id="pagination" class="pagenumbers"></div>
         </div>
-      </div>  
+      </div>
     </div>
     <!--add -->
-    <div class="modal-fade">
+    <div id="addModal" class="modal-fade" >
       <div class="modal-dialog">
         <div class="modal-content">
-          <form class="animate form-user" id="myForm">
+          <form class="animate form-user">
             <div class="modal-header">
               <h4 class="modal-title">Add Employee</h4>
-              <button 
-                type="submit"
+              <button
+                type="button"
                 class="close"
                 data-dismiss="modal"
                 aria-hidden="true"
-              > 
+              >
                 &times;
               </button>
             </div>
@@ -122,7 +122,7 @@
                 ></textarea>
                 <div class="error-message"></div>
               </div>
-              <div class="form-group">
+              <div class="form- group">
                 <label>Phone</label>
                 <input
                   type="text"
@@ -140,7 +140,7 @@
               </button>
             </div>
           </form>
-        </div>    
+        </div>
       </div>
     </div>
     <!--delete-->
@@ -150,7 +150,7 @@
           <form id="myform1" class="animate form-user">
             <div class="modal-header">
               <h4 class="modal-title">Delete Employee</h4>
-              <button 
+              <button
                 type="button"
                 class="close"
                 data-dismiss="modal"
@@ -178,7 +178,7 @@
     <div id="editModal" class="modal-fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form id="myForm2"  class="animate form-user">
+          <form class="animate form-user">
             <div class="modal-header">
               <h4 class="modal-title">Edit Employee</h4>
               <button
@@ -230,7 +230,7 @@
             </div>
           </form>
         </div>
-      </div>  
+      </div>
     </div>
     <script src="js/js.js"></script>
     <script src="js/showPopup.js"></script>

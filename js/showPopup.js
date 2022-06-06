@@ -24,6 +24,7 @@ window.onclick = function (event) {
     modal[1].style.display = "none";
   }
 };
+
 //checkbox all
 $("#selectAll").click(function (e) {
   if ($(this).hasClass("checkedAll")) {
@@ -34,7 +35,6 @@ $("#selectAll").click(function (e) {
     $(this).addClass("checkedAll");
   }
 });
-$(document).ready(function () {});
 //showpopup moda
 //showPopup edit, delete
 //edit

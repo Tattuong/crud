@@ -116,7 +116,7 @@ function loadButtons() {
     getOneTutorial($($(this)[0]).data("id"));
     e.preventDefault();
   });
-
+asda
   $(".deleteTut").click(function (e) {
     deleteTutorial($($(this)[0]).data("tutid"));
     e.preventDefault();
