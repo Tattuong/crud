@@ -8,7 +8,9 @@ const myCheckbox = document.getElementById("selectAll");
 let id = "";
 let listSelectedUser = [];
 let listUsers = [];
+
 // list idCheckbox
+
 const addListSelected = (value) => {
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
   if (checkboxValue) {
@@ -18,6 +20,7 @@ const addListSelected = (value) => {
     listSelectedUser = listSelectedUser.filter((user) => user !== value);
   }
 };
+
 // list ALlIdCheckbox
 const checkAllUsers = () => {
   console.log(listUsers);
@@ -35,23 +38,24 @@ function fetchUsers() {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      listUsers = data.slice();
-      renderUsers()
+      listUsers = data;
+      renderUsers();
     });
 }
+
 // renderHTML
 function renderUsers() {
   tableUsers.innerHTML = "";
   listUsers.forEach((user) => {
     const output = ` 
-  <tr data-id= '${user.id}'>
+  <tr data-id='${user.id}'>
       <td>
         <span class="custom-checkbox">
             <input type="checkbox" onchange ="addListSelected(${user.id})" id="checkbox1${user.id}" name="options[]" value="1">
           <label for="checkbox1"></label>
         </span> 
       </td> 
-      <td>${user.name}</td>
+      <td>${user.name}</td> 
       <td>${user.email}</td>  
       <td>${user.address}</td>
       <td>${user.phone}</td>
@@ -88,52 +92,21 @@ function handleDeleteUser(e) {
     method: "DELETE",
   })
     .then((res) => res.json())
-    .then((data) => renderUsers());
+    .then(() => {
+      listUsers = listUsers.filter((user) => user.id !== id);
+      renderUsers();
+    });
   $("#deleteModal").modal("hide");
 }
 
-// function handleDeleteUser(id) {
-//   fetch(`{url}/${id}`, {
-//     method: "DELETE",
-//   })
-//     .then((res) => {
-//       if (res.ok) {
-//         return res.json();
-//       }
-//     })
-//     .then((res) => {
-//       const chekbox = listUsers.findIndex((user) => user.id === id);
-//       const newPostArray = listUsers.filter((user) => user.id != id);
-//       fetchUsers(renderUsers);
-//     });
-//   }
-
-// }
-//       method: "DELETE",
-//     })
-//       .then((res) => res.json())
-//       .then(() => fetchUsers());
-//   });
-// let deletedID = +eve.getAttribute('data-id');
-// let newPostArray = postArray.filter(obj => obj.id != deletedID);
-// cl(newPostArray);
-// templating(newPostArray);
-// let deletedURL = `${url}/${deletedID}`;
-// try{
-//     let responseData = await makeFetchAPICall("DELETE", deletedURL);
-// }catch(err){
-//     cl(err);
-// }
-
-//resetform
 function resetInputForm() {
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
   document.getElementById("address").value = "";
   document.getElementById("phone").value = "";
 }
-//add
 
+//add
 function handleAddUser(e) {
   e.preventDefault();
   fetch(url, {
@@ -149,41 +122,50 @@ function handleAddUser(e) {
     }),
   })
     .then((res) => res.json())
-    .then((data) => { 
-      listUsers.push = [data];
+    .then((data) => {
+      listUsers.push(data);
       renderUsers();
     });
-  $(".form-user").modal("hide");
+  $("#addModal").modal("hide");
   resetInputForm();
 }
+//edit
+function handleEditUser(e) {
+  e.preventDefault();
+  fetch(`${url}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: editModalForm.name.value,
+      email: editModalForm.email.value,
+      address: editModalForm.address.value,
+      phone: editModalForm.phone.value,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      listUsers = listUsers.map((user) => {
+        if (user.id === id) {
+          return data;
+        }
+        return user;
+      });
+      console.log(listUsers);
+      console.log("update", data);
+      renderUsers();
+    });
+  $("#editModal").modal("hide");
+  return 0;
+}
 
-  //edit
+deleteModalForm.addEventListener("submit", handleDeleteUser);
+addModalForm.addEventListener("submit", handleAddUser);
+editModalForm.addEventListener("submit", handleEditUser);
+myCheckbox.addEventListener("change", checkAllUsers);
 
-  function handleEditUser(e) {
-    e.preventDefault();
-    fetch(`${url}/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: editModalForm.name.value,
-        email: editModalForm.email.value,
-        address: editModalForm.address.value,
-        phone: editModalForm.phone.value,
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => renderUsers()); 
-    $("#editModal").modal("hide");
-  }
-
-  deleteModalForm.addEventListener("submit", handleDeleteUser);
-  addModalForm.addEventListener("submit", handleAddUser);
-  editModalForm.addEventListener("submit", handleEditUser);
-  myCheckbox.addEventListener("change", checkAllUsers);
-
-  function start() {
+function start() {
   fetchUsers();
 }
 start();
