@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link 
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
@@ -24,12 +24,19 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+
     <title>Manage Employees</title>
     <link rel="stylesheet" href="css/style.css" />
-  </head>   
+  </head>
   <body>
     <div class="container">
       <div class="table-responsive">
@@ -40,13 +47,13 @@
                 <h2>Manage <b>Employees</b></h2>
               </div>
               <div class="col-sm-6">
-                <button class="btn btn-success myBtn">
+                <button class="btn btn-success myBtn" id="button">
                   <i class="bi bi-plus-circle-fill" style="font-size: 16px"></i>
                   Add New Employee
                 </button>
                 <button class="btn btn-danger myBtn" id="allDel">
                   <i class="bi bi-x-circle-fill" style="font-size: 16px"></i>
-                  Delete  
+                  Delete
                 </button>
               </div>
             </div>
@@ -74,7 +81,7 @@
       </div>
     </div>
     <!--add -->
-    <div id="addModal" class="modal-fade" >
+    <div id="addModal" class="modal-fade" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <form class="animate form-user">
@@ -135,8 +142,19 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success" id="add-btn">
+              <!-- <button typedong bo va bat dong bo trong javascript 5="submit" id="btnFetch" class="btn btn-success mb-2">Add</button> -->
+              <button
+                type="submit"
+                class="btn btn-success"
+                id="add-btn"
+                aria-hidden="true"
+              >
                 Add
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               </button>
             </div>
           </form>
@@ -144,7 +162,7 @@
       </div>
     </div>
     <!--delete-->
-    <div id="deleteModal" class="modal-fade">
+    <div id="deleteModal" class="modal-fade" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <form id="myform1" class="animate form-user">
@@ -161,12 +179,17 @@
             </div>
             <div class="modal-body">
               <p>Are you sure you want to delete these Records?</p>
-              <p class="text-warning ">
+              <p class="text-warning">
                 <small>This action cannot be undone.</small>
               </p>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-danger" id="delete-btn">
+              <button
+                type="submit"
+                class="btn btn-danger"
+                id="delete-btn"
+                aria-hidden="true"
+              >
                 Delete
               </button>
             </div>
@@ -197,7 +220,7 @@
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input
+                <input  
                   type="email"
                   class="form-control"
                   required
@@ -208,9 +231,9 @@
                 <label for="address">Address</label>
                 <textarea
                   class="form-control"
-                  name="address"
+                  name="address"  
                   required
-                ></textarea>  
+                ></textarea>
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>

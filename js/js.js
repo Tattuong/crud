@@ -9,6 +9,39 @@ let id = "";
 let listSelectedUser = [];
 let listUsers = [];
 
+function setModal(isOpen) {
+  document.querySelector("#addModal").style.display = isOpen ? "block" : "none";
+}
+// $(document).ready(function() {
+//   $("#btnFetch").click(function() {
+//     // disable button
+//     $(this).prop("disabled", true);
+//     // add spinner to button
+//     $(this).html(
+//       `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+//     );
+//     renderUsers();
+//     setModal(false)
+//   });
+// });
+// var modalshow = true;
+// function openModal() {
+//   document.querySelector("#button").addEventListener("click", () => {
+//     if (modalshow = true) {
+//       $("#addModal").modal("show");
+//       modalshow = false;
+//     }
+//   });
+// }
+
+// var modalshow = true;
+
+// $("#button").click(function () {
+//   if ((modalshow = true)) {
+//     $("#addModal").modal("show");
+//     modalshow = false;
+//   }
+// });
 // list idCheckbox
 
 const addListSelected = (value) => {
@@ -42,6 +75,7 @@ function fetchUsers() {
       renderUsers();
     });
 }
+
 
 // renderHTML
 function renderUsers() {
@@ -96,6 +130,7 @@ function handleDeleteUser(e) {
       listUsers = listUsers.filter((user) => user.id !== id);
       renderUsers();
     });
+
   $("#deleteModal").modal("hide");
 }
 
@@ -105,7 +140,6 @@ function resetInputForm() {
   document.getElementById("address").value = "";
   document.getElementById("phone").value = "";
 }
-
 //add
 function handleAddUser(e) {
   e.preventDefault();
@@ -125,8 +159,8 @@ function handleAddUser(e) {
     .then((data) => {
       listUsers.push(data);
       renderUsers();
+      setModal(false);
     });
-  $("#addModal").modal("hide");
   resetInputForm();
 }
 //edit
@@ -157,7 +191,6 @@ function handleEditUser(e) {
       renderUsers();
     });
   $("#editModal").modal("hide");
-  return 0;
 }
 
 deleteModalForm.addEventListener("submit", handleDeleteUser);

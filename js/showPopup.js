@@ -2,7 +2,7 @@ const modal = document.getElementsByClassName("modal-fade");
 const btn = document.getElementsByClassName("myBtn");
 const close = document.getElementsByClassName("close");
 
-// popup
+// // popup
 btn[0].onclick = () => {
   modal[0].style.display = "block";
 };
@@ -37,4 +37,4 @@ $("#selectAll").click(function () {
 //showpopup modal
 //showPopup edit, delete
 //edit
-
+//reload 

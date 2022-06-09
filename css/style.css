@@ -291,7 +291,7 @@ table.table .avatar {
   outline: none;
   cursor: pointer;
 
-    background-color: #44aaee;
+  background-color: #44aaee;
 
   margin: 5px;
   transition: 0.4s;
@@ -304,4 +304,12 @@ table.table .avatar {
 
 #address {
   resize: none;
-} 
+}
+
+.spinner-border{
+
+}
+
+.loading-spinner.active {
+  display: inline-block;
+}
