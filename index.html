@@ -142,19 +142,14 @@
               </div>
             </div>
             <div class="modal-footer">
-              <!-- <button typedong bo va bat dong bo trong javascript 5="submit" id="btnFetch" class="btn btn-success mb-2">Add</button> -->
               <button
+                id="loading-btn"
                 type="submit"
-                class="btn btn-success"
-                id="add-btn"
+                class="btn btn-success action-btn "
                 aria-hidden="true"
+                
               >
                 Add
-                <span
-                  class="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
               </button>
             </div>
           </form>
@@ -187,7 +182,43 @@
               <button
                 type="submit"
                 class="btn btn-danger"
-                id="delete-btn"
+                id="btn_delete"
+                aria-hidden="true"
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--delete2-->
+    <div id="deleteModal2" class="modal-fade" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="myform1" class="animate form-user">
+            <div class="modal-header">
+              <h4 class="modal-title">Delete Employee</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete these Records?</p>
+              <p class="text-warning">
+                <small>This action cannot be undone.</small>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                id = "loading-btn"
+                type="submit"
+                class="btn btn-danger action-btn"
                 aria-hidden="true"
               >
                 Delete
@@ -220,7 +251,7 @@
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input  
+                <input
                   type="email"
                   class="form-control"
                   required
@@ -231,7 +262,7 @@
                 <label for="address">Address</label>
                 <textarea
                   class="form-control"
-                  name="address"  
+                  name="address"
                   required
                 ></textarea>
               </div>
@@ -247,7 +278,7 @@
                 data-dismiss="modal"
                 value="Cancel"
               />
-              <button type="submit" class="btn btn-info" id="edit-btn">
+              <button type="submit" class="btn btn-info action-btn" id="loading-btn">
                 Update
               </button>
             </div>

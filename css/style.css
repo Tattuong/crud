@@ -14,7 +14,6 @@ body {
   min-width: 1000px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
-
 .table-title {
   padding-bottom: 15px;
   background: #435d7d;
@@ -23,7 +22,7 @@ body {
   min-width: 100%;
   margin: -20px -25px 10px;
   border-radius: 3px 3px 0 0;
-}
+} 
 .table-title h2 {
   margin: 5px 0 0;
   font-size: 24px;
@@ -306,10 +305,60 @@ table.table .avatar {
   resize: none;
 }
 
-.spinner-border{
-
-}
-
 .loading-spinner.active {
   display: inline-block;
 }
+
+.action-btn {
+  background-color: #027925;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  border-radius: 0.15em;
+  transition: 0.3s;
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+
+.action-btn:hover {
+  background-color: #00d447;
+}
+
+.action-btn:focus {
+  outline: 0.05em dashed #09e452; 
+  outline-offset: 0.05em;
+}
+
+.action-btn::after {
+  content: '';
+  display: block;
+  width: 0.8em;
+  height: 0.8em;
+  position: absolute;
+  left: calc(50% - 0.75em);
+  top: calc(50% - 0.75em);
+  border: 0.15em solid transparent;
+  border-right-color: white;
+  border-radius: 50%;
+  animation: button-anim 0.7s linear infinite;
+  opacity: 0;
+}
+@keyframes button-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.action-btn.loading {
+  color: transparent;
+}
+
+.action-btn.loading::after {
+  opacity: 1;
+}
+

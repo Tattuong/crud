@@ -20,7 +20,7 @@ function fetchData() {
               <input onchange="addListSelected(${user.id})" type="checkbox" id="checkbox1${user.id}" name="options[]" value="1">
             <label for="checkbox1"></label>
           </span> 
-        </td>
+        </td> 
         <td>${user.name}</td>
         <td>${user.email}</td>  
         <td>${user.address}</td>
@@ -116,7 +116,6 @@ function loadButtons() {
     getOneTutorial($($(this)[0]).data("id"));
     e.preventDefault();
   });
-asda
   $(".deleteTut").click(function (e) {
     deleteTutorial($($(this)[0]).data("tutid"));
     e.preventDefault();
