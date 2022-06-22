@@ -330,7 +330,6 @@ table.table .avatar {
   outline: 0.05em dashed #09e452; 
   outline-offset: 0.05em;
 }
-
 .action-btn::after {
   content: '';
   display: block;
@@ -362,3 +361,51 @@ table.table .avatar {
   opacity: 1;
 }
 
+@keyframes button-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.action-btn.loading1 {
+  color: transparent;
+}
+
+.action-btn.loading1::after {
+  opacity: 1;
+}
+
+.buttonload .fa-spin{
+  margin-right:10px;
+  }
+  .heding h1{
+  text-shadow: 5px 5px 5px #fff;
+  font-weight:bold;
+  margin-bottom: 50px;
+  }
+    
+#loading{
+  width: 2rem;
+  height: 2rem;
+  border: 5px solid #f3f3f3;
+  border-top: 6px solid red;
+  border-radius: 100%;
+  margin: auto;
+  visibility: hidden;
+  animation: spin 1s infinite linear;  
+}
+#loading.display {
+  visibility: hidden;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+  
+}

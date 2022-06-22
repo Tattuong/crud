@@ -8,6 +8,11 @@
     />
     <link
       rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <link
@@ -33,6 +38,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <title>Manage Employees</title>
     <link rel="stylesheet" href="css/style.css" />
@@ -81,7 +92,7 @@
       </div>
     </div>
     <!--add -->
-    <div id="addModal" class="modal-fade" aria-hidden="true">
+    <div id="addModal" class="modal-fade hidee" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <form class="animate form-user">
@@ -129,7 +140,7 @@
                 ></textarea>
                 <div class="error-message"></div>
               </div>
-              <div class="form- group">
+              <div class="form-group">
                 <label>Phone</label>
                 <input
                   type="text"
@@ -142,12 +153,19 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button
+              <!-- <button
                 id="loading-btn"
                 type="submit"
-                class="btn btn-success action-btn "
+                class="btn btn-success action-btn"
                 aria-hidden="true"
-                
+              >
+                Add
+              </button> -->
+              <button
+                name="Add"
+                type="submit"
+                class="btn btn-success loading buttonload"
+                id="add_user_button"
               >
                 Add
               </button>
@@ -155,14 +173,15 @@
           </form>
         </div>
       </div>
+      s
     </div>
     <!--delete-->
-    <div id="deleteModal" class="modal-fade" aria-hidden="true">
+    <div id="deleteModal" class="modal-fade hidee" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <form id="myform1" class="animate form-user">
             <div class="modal-header">
-              <h4 class="modal-title">Delete Employee</h4>
+              <h4 class="modal-title">Delete Employees</h4>
               <button
                 type="button"
                 class="close"
@@ -179,11 +198,19 @@
               </p>
             </div>
             <div class="modal-footer">
-              <button
+              <!-- <button
                 type="submit"
-                class="btn btn-danger"
-                id="btn_delete"
+                class="btn btn-danger "
+                id="loading-btn"
                 aria-hidden="true"
+              >
+                Delete
+              </button> -->
+              <button
+                name="Delete"
+                type="submit"
+                class="btn btn-danger loading buttonload"
+                id="delete_user_button"
               >
                 Delete
               </button>
@@ -215,11 +242,19 @@
               </p>
             </div>
             <div class="modal-footer">
-              <button
-                id = "loading-btn"
+              <!-- <button
+                id="loading-btn"
                 type="submit"
                 class="btn btn-danger action-btn"
                 aria-hidden="true"
+              >
+                Delete
+              </button> -->
+              <button
+                name="Delete"
+                type="submit"
+                class="btn btn-danger loading buttonload"
+                id="del_user_button"
               >
                 Delete
               </button>
@@ -278,7 +313,20 @@
                 data-dismiss="modal"
                 value="Cancel"
               />
-              <button type="submit" class="btn btn-info action-btn" id="loading-btn">
+              <!-- <button
+                type="submit"
+                class="btn btn-info action-btn"
+                id="loading-btn"
+                aria-hidden="true"
+              >
+                Update
+              </button> -->
+              <button
+                name="Update"
+                type="submit"
+                class="btn btn-warning loading buttonload"
+                id="edit_user_button"
+              >
                 Update
               </button>
             </div>

@@ -122,6 +122,7 @@ function loadButtons() {
   });
 }
 
+
 function putTutorial(id, data) {
   $.ajax({
     url: URL + id,
@@ -159,7 +160,6 @@ function deleteTutorial(id) {
     },
   });
 }
-
 // const url = "http://localhost:3000/users"
 // $(document).ready(function () {
 //   var page = 1;

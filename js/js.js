@@ -9,68 +9,31 @@ const btnDeleteAll = document.getElementById("deleteModal");
 
 let id = "";
 let listSelectedUser = [];
-let listUsers = [];
+let listUsers = []; 
 
-function setModal(isOpen) {
-  document.querySelector("#addModal").style.display = isOpen ? "block" : "none";
-  document.querySelector("#deleteModal").style.display = isOpen
+const setModal = (isclose) => {
+  document.querySelector("#addModal").style.display = isclose ? "block" : "none";
+  document.querySelector("#deleteModal").style.display = isclose  
     ? "block"
     : "none";
 }
-// settimeout
-function loadingSm() {
-  loadingBtn.classList.add("loading");
-  // addBtn.form.firstElementChild.disabled = true;
-  setTimeout(() => loadingBtn.classList.remove("loading"), 6000);
-  // setTimeout(() => {
-  //   addBtn.classList.remove('loading');
-  //   addBtn.disabled = true;
-  //   addBtn.form.firstElementChild.disabled = false;
-  // }, 6000);
-}
 
-// let btn = document.querySelector('#add-btn');
-// btn.addEventListener('click', function () {
-//   btn.classList.add('spin');
-//   btn.disabled = true;
-//   btn.form.firstElementChild.disabled = true;
-//   window.setTimeout(function () {
-//     btn.classList.remove('spin');
-//     btn.disabled = false;
-//     btn.form.firstElementChild.disabled = false;
-//   }, 4000);
-// }, false);
 
-// $(document).ready(function() {
-//   $("#btnFetch").click(function() {
-//     // disable button
-//
-//     // add spinner to button
-//     $(this).html(
-//       `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
-//     );
-//     renderUsers();
-//     setModal(false)
-//   });
-// });
-// var modalshow = true;
-// function openModal() {
-//   document.querySelector("#button").addEventListener("click", () => {
-//     if (modalshow = true) {
-//       $("#addModal").modal("show");
-//       modalshow = false;
-//     }
-//   });
-// }
 
-// var modalshow = true;
-// $("#button").click(function () {
-//   if ((modalshow = true)) {
-//     $("#addModal").modal("show");
-//     modalshow = false;
-//   }
-// });
-// listidCheckbox
+const displayLoading = (id, isLoading) => {
+  const nameBtn = document.getElementById(id).name
+  const loadingBtn = document.getElementById(id);
+  if (isLoading) {
+    loadingBtn.innerHTML = `
+    <span class="spinner-border spinner-border-sm"></span>
+    Loading..
+ `;
+    loadingBtn.disabled = true
+  } else {
+    loadingBtn.innerHTML = nameBtn;
+    loadingBtn.disabled = false;
+  }
+};
 
 const addListSelected = (value) => {
   const checkboxValue = document.getElementById(`checkbox1${value}`).checked;
@@ -81,7 +44,6 @@ const addListSelected = (value) => {
     listSelectedUser = listSelectedUser.filter((user) => user !== value);
   }
 };
-
 // list ALlIdCheckbox
 const checkAllUsers = () => {
   console.log(listUsers);
@@ -103,7 +65,6 @@ const fetchUsers = () => {
     });
 };
 // renderHTML
-
 const renderUsers = () => {
   tableUsers.innerHTML = "";
   listUsers.forEach((user) => {
@@ -147,26 +108,26 @@ const renderUsers = () => {
 };
 
 const deleteAllUsers = async (e) => {
+  displayLoading("delete_user_button", true);
   e.preventDefault();
   const promisesDelete = listSelectedUser.map((id) => {
     return fetch(`${url}/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-    .then(() => {
-      listUsers = listUsers.filter((user) => user.id !== id)
-    } )
+    });
   });
   console.log("successful del", listSelectedUser);
   console.log(promisesDelete);
-
   await Promise.all(promisesDelete);
-  renderUsers();  
-  setModal();
+  listUsers = listUsers.filter((user) => !listSelectedUser.includes(user.id));
+  listSelectedUser = [];
+  displayLoading("delete_user_button", false);
+  renderUsers();
+  setModal(false);
   console.log("done");
 };
-  
+
 const handleDeleteUser = (e) => {
+  displayLoading("del_user_button", true);
   e.preventDefault();
   fetch(`${url}/${id}`, {
     method: "DELETE",
@@ -174,10 +135,12 @@ const handleDeleteUser = (e) => {
     .then((res) => res.json())
     .then(() => {
       listUsers = listUsers.filter((user) => user.id !== id);
+      displayLoading("del_user_button", false);
       renderUsers();
       $("#deleteModal2").modal("hide");
     });
 };
+
 const resetInputForm = () => {
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
@@ -186,6 +149,7 @@ const resetInputForm = () => {
 };
 //add
 const handleAddUser = (e) => {
+  displayLoading("add_user_button", true);
   e.preventDefault();
   fetch(url, {
     method: "POST",
@@ -202,13 +166,16 @@ const handleAddUser = (e) => {
     .then((res) => res.json())
     .then((data) => {
       listUsers.push(data);
+      displayLoading("add_user_button", false);
       renderUsers();
       setModal(false);
       resetInputForm();
     });
 };
+
 //edit
 const handleEditUser = (e) => {
+  displayLoading("edit_user_button", true);
   e.preventDefault();
   fetch(`${url}/${id}`, {
     method: "PATCH",
@@ -232,20 +199,16 @@ const handleEditUser = (e) => {
       });
       console.log(listUsers);
       console.log("update", data);
+      displayLoading("edit_user_button", false);
       renderUsers();
+      $("#editModal").modal("hide");
     });
-  $("#editModal").modal("hide");
 };
 
 deleteModalForm.addEventListener("submit", handleDeleteUser);
 addModalForm.addEventListener("submit", handleAddUser);
 editModalForm.addEventListener("submit", handleEditUser);
 myCheckbox.addEventListener("change", checkAllUsers);
-loadingBtn.addEventListener("click", loadingSm);
 btnDeleteAll.addEventListener("click", deleteAllUsers);
 
-const start = () => {
-  fetchUsers();
-};
-
-start();
+fetchUsers();
