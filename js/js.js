@@ -1,37 +1,44 @@
 const url = "http://localhost:3000/users";
 const addModalForm = document.querySelector("#addModal .form-user");
 const editModalForm = document.querySelector("#editModal .form-user");
-const deleteModalForm = document.querySelector("#deleteModal2 .form-user");
+const deleteModalBtn = document.querySelector("#deleteModal #del_user_button");
 const tableUsers = document.querySelector("#table-user");
 const myCheckbox = document.getElementById("selectAll");
 const loadingBtn = document.querySelector("#loading-btn");
-const btnDeleteAll = document.getElementById("deleteModal");
 
 let id = "";
 let listSelectedUser = [];
-let listUsers = []; 
+let listUsers = [];
 
 const setModal = (isclose) => {
-  document.querySelector("#addModal").style.display = isclose ? "block" : "none";
-  document.querySelector("#deleteModal").style.display = isclose  
+  document.querySelector("#addModal").style.display = isclose
     ? "block"
     : "none";
-}
-
-
+  document.querySelector("#deleteModal").style.display = isclose
+    ? "block"
+    : "none";
+};
 
 const displayLoading = (id, isLoading) => {
-  const nameBtn = document.getElementById(id).name
-  const loadingBtn = document.getElementById(id);
+  const btnElement = document.getElementById(id);
+
   if (isLoading) {
-    loadingBtn.innerHTML = `
+    btnElement.setAttribute("data-name", btnElement.innerHTML);
+  }
+
+  const btnHtmlInit = isLoading
+    ? btnElement.innerHTML
+    : btnElement.getAttribute("data-name");
+
+  if (isLoading) {
+    btnElement.innerHTML = `
     <span class="spinner-border spinner-border-sm"></span>
-    Loading..
+    Loading...
  `;
-    loadingBtn.disabled = true
+    btnElement.disabled = true;
   } else {
-    loadingBtn.innerHTML = nameBtn;
-    loadingBtn.disabled = false;
+    btnElement.innerHTML = btnHtmlInit;
+    btnElement.disabled = false;
   }
 };
 
@@ -82,7 +89,7 @@ const renderUsers = () => {
       <td>${user.phone}</td>
       <td>
         <a href="#editModal" class="btn-edit" ><i class="bi bi-pencil-fill" data-toggle="modal" title="Edit" style="font-size: 20px; color:#FFC107;"></i></a>
-        <a href="#deleteModal2" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
+        <a href="#deleteModal" class="btn-del"><i class="bi bi-trash-fill" data-toggle="tooltip" title="Delete" style="font-size: 20px; color:red"	></i></a>
       </td>
     </tr>       
 `;
@@ -90,7 +97,7 @@ const renderUsers = () => {
     const btnDel = document.querySelector(`[data-id = '${user.id}'] .btn-del`);
     btnDel.addEventListener("click", () => {
       id = user.id;
-      $("#deleteModal2").modal("show");
+      $("#deleteModal").modal("show");
     });
 
     const btnEdit = document.querySelector(
@@ -108,7 +115,7 @@ const renderUsers = () => {
 };
 
 const deleteAllUsers = async (e) => {
-  displayLoading("delete_user_button", true);
+  displayLoading("del_user_button", true);
   e.preventDefault();
   const promisesDelete = listSelectedUser.map((id) => {
     return fetch(`${url}/${id}`, {
@@ -120,13 +127,18 @@ const deleteAllUsers = async (e) => {
   await Promise.all(promisesDelete);
   listUsers = listUsers.filter((user) => !listSelectedUser.includes(user.id));
   listSelectedUser = [];
-  displayLoading("delete_user_button", false);
+  displayLoading("del_user_button", false);
   renderUsers();
   setModal(false);
   console.log("done");
 };
 
 const handleDeleteUser = (e) => {
+  if (!id) {
+    deleteAllUsers(e);
+    return;
+  }
+
   displayLoading("del_user_button", true);
   e.preventDefault();
   fetch(`${url}/${id}`, {
@@ -137,7 +149,8 @@ const handleDeleteUser = (e) => {
       listUsers = listUsers.filter((user) => user.id !== id);
       displayLoading("del_user_button", false);
       renderUsers();
-      $("#deleteModal2").modal("hide");
+      id = null;
+      $("#deleteModal").modal("hide");
     });
 };
 
@@ -205,10 +218,9 @@ const handleEditUser = (e) => {
     });
 };
 
-deleteModalForm.addEventListener("submit", handleDeleteUser);
+deleteModalBtn.addEventListener("click", handleDeleteUser);
 addModalForm.addEventListener("submit", handleAddUser);
 editModalForm.addEventListener("submit", handleEditUser);
 myCheckbox.addEventListener("change", checkAllUsers);
-btnDeleteAll.addEventListener("click", deleteAllUsers);
 
 fetchUsers();

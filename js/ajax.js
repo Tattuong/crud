@@ -10,7 +10,8 @@ function fetchData() {
     dataType: "json",
     data: {
       data: "testdata",
-    }, 
+    },
+    
     success: function (data) {
       console.log(data);
       $.each(data, function (key, user) {
